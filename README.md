@@ -11,7 +11,7 @@ Before the example nodes can be used it is required to build this packages by fo
 colcon build --event-handlers console_direct+ --symlink-install
 ```
 
-> **Note:** Please be aware of that the dependency edu_robot must be located in the same workspace or must be installed.
+> **Note:** Please be aware of that the dependency [edu_robot](https://github.com/EduArt-Robotik/edu_robot) must be located in the same workspace or must be installed.
 
 ## Don't hit the wall
 
@@ -38,5 +38,6 @@ ros2 run edu_robot_control_template dont_hit_the_wall_node.py --ros-args -r __ns
 
 Following is in progress and will be added to this repository soon:
 
+* Deploying your code via Docker image on your robot.
 * (C++) Provide GPIO state via ROS service.
 * (Python) Provide GPIO state via ROS service.
