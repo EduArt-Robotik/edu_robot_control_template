@@ -5,13 +5,23 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-## Dependencies
-# find dependencies
+# Dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(edu_robot REQUIRED)
 
+# Building Nodes
 add_subdirectory(src)
+
+# Installing Build Nodes
+install(
+  TARGETS
+    dont-hit-the-wall-node
+  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
+  INCLUDES DESTINATION include  
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
