@@ -7,7 +7,9 @@ endif()
 
 # Dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
 find_package(edu_robot REQUIRED)
 
 # Building Nodes
@@ -21,6 +23,13 @@ install(
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
   INCLUDES DESTINATION include  
+)
+
+# Install Python Nodes
+install(
+  PROGRAMS
+    scripts/dont_hit_the_wall_node.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
