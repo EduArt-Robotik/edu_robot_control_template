@@ -34,6 +34,24 @@ ros2 run edu_robot_control_template dont-hit-the-wall-node --ros-args -r __ns:=<
 ros2 run edu_robot_control_template dont_hit_the_wall_node.py --ros-args -r __ns:=<put here the namespace of your robot, like /eduard/blue>
 ```
 
+# Docker Container on Robot
+
+EduArt's philosophy to deploy software on its robots using Docker container that come with all needed libraries and ROS framework. Alternative the ROS framework could also be compiled from source on the robot (or on desktop using a cross compiler), but this would be very time consuming.
+
+The [Dockerfile](docker/Dockerfile) shows an example how this repository can be compiled inside a Docker.
+
+## Building Docker Image on Robot
+
+
+
+## Building Docker Image on Desktop using Buildx
+
+## Launch Docker Container
+
+### Using a Shell
+
+### Using Docker Compose File
+
 # Coming Soon
 
 Following is in progress and will be added to this repository soon:

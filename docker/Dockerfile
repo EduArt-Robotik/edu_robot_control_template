@@ -20,7 +20,9 @@ RUN echo "cloning sources" \
 
 ## Building ROS packages
 RUN echo "building package" \
+    # Setting up ROS environment by sourcing setup file.
     && source /opt/ros/$ROS_DISTRO/setup.bash \
     && source /home/$USER/.bashrc \
     # Building project using colcon. It is important to use "MAKEFLAGS=-j1" on IoT2050, because of limited hardware resources.
+    && cd /home/$USER/ros/ \
     && MAKEFLAGS="-j1" colcon build --symlink-install --executor sequential --event-handlers console_direct+ --cmake-args -DCMAKE_BUILD_TYPE=Release
