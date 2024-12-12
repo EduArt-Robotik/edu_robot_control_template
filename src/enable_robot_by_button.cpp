@@ -11,6 +11,40 @@
 
 using namespace std::chrono_literals;
 
+// helper function for getting given mode as string
+std::string get_mode_string(const edu_robot::msg::Mode mode)
+{
+  std::string mode_string;
+
+  if (mode.mode & edu_robot::msg::Mode::INACTIVE) {
+    mode_string += "INACTIVE|";
+  }
+  if (mode.mode & edu_robot::msg::Mode::REMOTE_CONTROLLED) {
+    mode_string += "REMOTE CONTROLLED|";
+  }
+  if (mode.mode & edu_robot::msg::Mode::AUTONOMOUS) {
+    mode_string += "FLEET|";
+  }
+  if (mode.feature_mode & edu_robot::msg::Mode::COLLISION_AVOIDANCE) {
+    mode_string += "COLLISION_AVOIDANCE|";
+  }
+  if (mode.feature_mode & edu_robot::msg::Mode::COLLISION_AVOIDANCE_OVERRIDE) {
+    mode_string += "COLLISION_AVOIDANCE_OVERRIDE|";
+  }  
+  if (mode.drive_kinematic & edu_robot::msg::Mode::SKID_DRIVE) {
+    mode_string += "SKID_DRIVE|";
+  }
+  if (mode.drive_kinematic & edu_robot::msg::Mode::MECANUM_DRIVE) {
+    mode_string += "MECANUM_DRIVE|";
+  }
+
+  if (mode_string.empty() == false) {
+    mode_string.pop_back();
+  }
+
+  return mode_string;
+}
+
 /**
  * \brief This ROS node enables the robot by a button pressure at a GPIO. It shows how a button can be read as input.
  *
@@ -38,7 +72,39 @@ public:
 private:
   void process()
   {
+    // alias for service response future type (just for better reading)
+    using ResponseFuture = rclcpp::Client<edu_robot::srv::SetMode>::SharedFutureWithRequest;
 
+    // is called by the timer every 100ms
+    const int button_value = _enable_button.read();
+
+    if (button_value < 0) {
+      // error occurred during reading of button input value
+      RCLCPP_ERROR(get_logger(), "error occurred during reading of button input value");
+      return;
+    }
+
+    const bool is_pressed = button_value != 0;
+
+    if (_was_pressed == false && is_pressed == true) {
+      // detected positive edge --> button was pressed right now
+      auto request = std::make_shared<edu_robot::srv::SetMode::Request>();
+      // set robot mode to autonomous
+      request->mode.mode = edu_robot::msg::Mode::AUTONOMOUS;
+
+      // call service async and process response in a lambda function
+      _client_set_mode->async_send_request(request, [logger = get_logger()](ResponseFuture future){
+        const auto response = future.get();
+
+        if ((response.second->state.mode.mode & response.first->mode.mode) == false) {
+          RCLCPP_ERROR_STREAM(logger, "Can't disable robot! Robot is in mode = " << get_mode_string(response.second->state.mode));
+          return;
+        }
+
+        RCLCPP_INFO(logger, "Set mode INACTIVE successfully.");
+        RCLCPP_INFO(logger, "Current mode of the robot is = %s", get_mode_string(response.second->state.mode).c_str());      
+      });
+    }
   }
 
   std::shared_ptr<rclcpp::Client<edu_robot::srv::SetMode>> _client_set_mode;

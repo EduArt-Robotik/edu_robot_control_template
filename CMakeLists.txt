@@ -20,6 +20,7 @@ add_subdirectory(src)
 install(
   TARGETS
     dont-hit-the-wall-node
+    enable-robot-by-button
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
