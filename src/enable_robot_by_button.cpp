@@ -105,6 +105,8 @@ private:
         RCLCPP_INFO(logger, "Current mode of the robot is = %s", get_mode_string(response.second->state.mode).c_str());      
       });
     }
+
+    _was_pressed = is_pressed;
   }
 
   std::shared_ptr<rclcpp::Client<edu_robot::srv::SetMode>> _client_set_mode;
