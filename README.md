@@ -53,6 +53,18 @@ Make sure you setted up the IOT GPIOs right:
 ros2 run edu_robot_control_template enable-robot-by-button --ros-args -r __ns:=/eduard/blue
 ```
 
+# Deploying Using Docker
+
+Unfortunately, it is necessary to run ROS2 applications in a Docker container on the IoT2050. This is due to the fact that no ROS2 packages are available for Debian 11. The following describes how to deploy a ROS2 package into a Docker image and start ROS2 nodes from it.
+
+## Building Docker Image
+
+Please execute in the top level folder of your ROS2 package following command to build an Docker image of it:
+
+```bash
+docker build -t edu-robot-control-template .
+```
+
 # Coming Soon
 
 Following is in progress and will be added to this repository soon:
