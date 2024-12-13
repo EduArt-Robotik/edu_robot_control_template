@@ -84,10 +84,13 @@ private:
       return;
     }
 
-    const bool is_pressed = button_value != 0;
+    // reading button state: when button is pressed it pulls the signal down to zero voltage.
+    const bool is_pressed = button_value == 0;
 
     if (_was_pressed == false && is_pressed == true) {
       // detected positive edge --> button was pressed right now
+      RCLCPP_INFO(get_logger(), "button was pressed");
+
       auto request = std::make_shared<edu_robot::srv::SetMode::Request>();
       // set robot mode to autonomous
       request->mode.mode = edu_robot::msg::Mode::AUTONOMOUS;

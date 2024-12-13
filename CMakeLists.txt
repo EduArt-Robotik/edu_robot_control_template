@@ -32,6 +32,7 @@ install(
 install(
   PROGRAMS
     scripts/dont_hit_the_wall_node.py
+    scripts/enable_robot_by_button.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

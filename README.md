@@ -34,6 +34,25 @@ ros2 run edu_robot_control_template dont-hit-the-wall-node --ros-args -r __ns:=<
 ros2 run edu_robot_control_template dont_hit_the_wall_node.py --ros-args -r __ns:=<put here the namespace of your robot, like /eduard/blue>
 ```
 
+## Enable Robot by Button
+
+### GPIO
+
+Make sure you setted up the IOT GPIOs right:
+- iot2050setups
+- Peripherals
+- Configure Arduino I/O
+- Enable GPIO
+- Arrow keys to your PIN (in this case GPIO4 and GPIO5)
+- Tap to "Direction" -> Arrow keys to "Input" Tap to "Pull-Mode"
+- "Pull - up" for low active -> Tap to <OK> -> Enter -> Esc for exit
+
+### Launching
+
+```bash
+ros2 run edu_robot_control_template enable-robot-by-button --ros-args -r __ns:=/eduard/blue
+```
+
 # Coming Soon
 
 Following is in progress and will be added to this repository soon:
