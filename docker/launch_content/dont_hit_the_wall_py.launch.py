@@ -16,7 +16,7 @@ def generate_launch_description():
   # Bring Up Enable Robot By Button Node
   dont_hit_the_wall = Node(
     package='edu_robot_control_template',
-    executable='dont_hit_the_wall.py',
+    executable='dont_hit_the_wall_node.py',
     name='dont_hit_the_wall',
     namespace=edu_robot_namespace,
     output='screen'
