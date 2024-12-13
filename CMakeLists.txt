@@ -7,10 +7,12 @@ endif()
 
 # Dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_ros REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclpy REQUIRED)
 find_package(edu_robot REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 # Building Nodes
 add_subdirectory(src)
@@ -19,6 +21,7 @@ add_subdirectory(src)
 install(
   TARGETS
     dont-hit-the-wall-node
+    enable-robot-by-button
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
@@ -29,6 +32,7 @@ install(
 install(
   PROGRAMS
     scripts/dont_hit_the_wall_node.py
+    scripts/enable_robot_by_button.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

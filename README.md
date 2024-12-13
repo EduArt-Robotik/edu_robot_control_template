@@ -34,10 +34,78 @@ ros2 run edu_robot_control_template dont-hit-the-wall-node --ros-args -r __ns:=<
 ros2 run edu_robot_control_template dont_hit_the_wall_node.py --ros-args -r __ns:=<put here the namespace of your robot, like /eduard/blue>
 ```
 
-# Coming Soon
+## Enable Robot by Button
 
-Following is in progress and will be added to this repository soon:
+### GPIO
 
-* Deploying your code via Docker image on your robot.
-* (C++) Provide GPIO state via ROS service.
-* (Python) Provide GPIO state via ROS service.
+Make sure you setted up the IOT GPIOs right:
+- iot2050setups
+- Peripherals
+- Configure Arduino I/O
+- Enable GPIO
+- Arrow keys to your PIN (in this case GPIO4 and GPIO5)
+- Tap to "Direction" -> Arrow keys to "Input" Tap to "Pull-Mode"
+- "Pull - up" for low active -> Tap to <OK> -> Enter -> Esc for exit
+
+### Launching
+
+```bash
+ros2 run edu_robot_control_template enable-robot-by-button --ros-args -r __ns:=/eduard/blue
+```
+
+# Deploying Using Docker
+
+Unfortunately, it is necessary to run ROS2 applications in a Docker container on the IoT2050. This is due to the fact that no ROS2 packages are available for Debian 11. The following describes how to deploy a ROS2 package into a Docker image and start ROS2 nodes from it.
+
+## Building Docker Image
+
+Please execute in the top level folder of your ROS2 package following command to build an Docker image of it:
+
+```bash
+docker build -t edu-robot-control-template .
+```
+
+## Launching Enable Robot By Button
+
+First enter the docker folder:
+
+```bash
+cd <folder of the ros2 package>
+cd docker
+```
+
+Now you can launch the application using a docker compose file. This files makes it easier to handle all the needed flags. It also provides a functionality to autostart your application after boot up. Please check the yaml file for more details.
+
+```bash
+docker compose -f enable_robot_by_button.yaml up
+```
+
+## Launching don't hit the wall cpp
+
+First enter the docker folder:
+
+```bash
+cd <folder of the ros2 package>
+cd docker
+```
+
+Now you can launch the application using a docker compose file. This files makes it easier to handle all the needed flags. It also provides a functionality to autostart your application after boot up. Please check the yaml file for more details.
+
+```bash
+docker compose -f dont_hit_the_wall_cpp.yaml up
+```
+
+## Launching don't hit the wall py
+
+First enter the docker folder:
+
+```bash
+cd <folder of the ros2 package>
+cd docker
+```
+
+Now you can launch the application using a docker compose file. This files makes it easier to handle all the needed flags. It also provides a functionality to autostart your application after boot up. Please check the yaml file for more details.
+
+```bash
+docker compose -f dont_hit_the_wall_py.yaml up
+```

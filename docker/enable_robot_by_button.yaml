@@ -1,0 +1,25 @@
+services:
+  enable-robot-by-button:
+    image: edu-robot-control-template
+    container_name: enable-robot-by-button
+    user: root
+    restart: always
+    privileged: true
+    ipc: host
+    pid: host
+    # The below environment variables are necessary to respect the robots namespace and the used ROS2 middleware.
+    environment:
+       - EDU_ROBOT_NAMESPACE=${EDU_ROBOT_NAMESPACE}
+       - RMW_IMPLEMENTATION=${RMW_IMPLEMENTATION}
+    network_mode: "host"
+    devices:
+        - '/dev:/dev'
+    # A good praxis is to mount your launch files into the Docker container. So you can change parameters or the launch
+    # file without rebuilding the Docker image.
+    volumes:
+        - './launch_content:/home/user/ros/launch_content:r'
+    # The command is used to launch your wanted ROS2 node or launch file. This is actually the only thing that needs
+    # to be changed, if you want to start a different node of your package.
+    # Note: please use a bash (for your favorite shell) for executing commands. Please be aware that the entrypoint
+    # (a file you can found in top level folder of this package) defines the "environment" of your command.
+    command: bash -c 'cd /home/user/ros/launch_content; ros2 launch enable_robot_by_button.launch.py'
