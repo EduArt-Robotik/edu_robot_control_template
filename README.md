@@ -65,10 +65,47 @@ Please execute in the top level folder of your ROS2 package following command to
 docker build -t edu-robot-control-template .
 ```
 
-# Coming Soon
+## Launching Enable Robot By Button
 
-Following is in progress and will be added to this repository soon:
+First enter the docker folder:
 
-* Deploying your code via Docker image on your robot.
-* (C++) Provide GPIO state via ROS service.
-* (Python) Provide GPIO state via ROS service.
+```bash
+cd <folder of the ros2 package>
+cd docker
+```
+
+Now you can launch the application using a docker compose file. This files makes it easier to handle all the needed flags. It also provides a functionality to autostart your application after boot up. Please check the yaml file for more details.
+
+```bash
+docker compose -f enable_robot_by_button.yaml up
+```
+
+## Launching don't hit the wall cpp
+
+First enter the docker folder:
+
+```bash
+cd <folder of the ros2 package>
+cd docker
+```
+
+Now you can launch the application using a docker compose file. This files makes it easier to handle all the needed flags. It also provides a functionality to autostart your application after boot up. Please check the yaml file for more details.
+
+```bash
+docker compose -f dont_hit_the_wall_cpp.yaml up
+```
+
+## Launching don't hit the wall py
+
+First enter the docker folder:
+
+```bash
+cd <folder of the ros2 package>
+cd docker
+```
+
+Now you can launch the application using a docker compose file. This files makes it easier to handle all the needed flags. It also provides a functionality to autostart your application after boot up. Please check the yaml file for more details.
+
+```bash
+docker compose -f dont_hit_the_wall_py.yaml up
+```

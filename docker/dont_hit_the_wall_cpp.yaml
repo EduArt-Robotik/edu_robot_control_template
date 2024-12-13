@@ -1,7 +1,7 @@
 services:
   dont-hit-the-wall-cpp:
     image: edu-robot-control-template
-    container_name: edu-robot-control-template
+    container_name: dont-hit-the-wall-cpp
     user: root
     restart: always
     privileged: true

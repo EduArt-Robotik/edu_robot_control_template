@@ -1,7 +1,7 @@
 services:
   enable-robot-by-button:
     image: edu-robot-control-template
-    container_name: edu-robot-control-template
+    container_name: enable-robot-by-button
     user: root
     restart: always
     privileged: true
