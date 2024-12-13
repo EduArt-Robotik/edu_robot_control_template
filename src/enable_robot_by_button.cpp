@@ -104,7 +104,7 @@ private:
           return;
         }
 
-        RCLCPP_INFO(logger, "Set mode INACTIVE successfully.");
+        RCLCPP_INFO(logger, "Set mode AUTONOMOUS successfully.");
         RCLCPP_INFO(logger, "Current mode of the robot is = %s", get_mode_string(response.second->state.mode).c_str());      
       });
     }

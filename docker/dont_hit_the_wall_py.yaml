@@ -1,5 +1,5 @@
 services:
-  enable-robot-by-button:
+  dont-hit-the-wall-py:
     image: edu-robot-control-template
     container_name: edu-robot-control-template
     user: root

@@ -16,7 +16,7 @@ def generate_launch_description():
   # Bring Up Enable Robot By Button Node
   enable_robot_by_button = Node(
     package='edu_robot_control_template',
-    executable=' enable-robot-by-button',
+    executable='enable-robot-by-button',
     name='enable_robot_by_button',
     namespace=edu_robot_namespace,
     output='screen'
