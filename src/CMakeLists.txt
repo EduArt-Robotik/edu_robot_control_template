@@ -26,3 +26,17 @@ ament_target_dependencies(enable-robot-by-button
   "rclcpp"
   "edu_robot"
 )
+
+# Toggle LED
+add_executable(toggle_led
+  toggle_led_node.cpp
+)
+# Non ROS Dependencies
+target_link_libraries(toggle_led
+  mraa
+)
+# ROS Dependencies
+ament_target_dependencies(toggle_led
+  "rclcpp"
+  "edu_robot"
+)

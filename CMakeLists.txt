@@ -22,6 +22,7 @@ install(
   TARGETS
     dont-hit-the-wall-node
     enable-robot-by-button
+    toggle_led
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
